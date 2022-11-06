@@ -32,8 +32,8 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 DatabaseHelper dbHE = new DatabaseHelper(UpdateNoteActivity.this);
                 title = etTitle.getText().toString();
                 content = etContent.getText().toString();
-                dbHE.updateData(id, title, content);
-            }
+                dbHE.updateData(id,title,content);
+           }
         });
     }
 

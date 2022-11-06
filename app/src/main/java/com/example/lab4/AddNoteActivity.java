@@ -28,7 +28,9 @@ public class AddNoteActivity extends AppCompatActivity {
                 long createdTime = System.currentTimeMillis();
 
                 DatabaseHelper dbHE = new DatabaseHelper(AddNoteActivity.this);
+
                 dbHE.addNote(title, content, createdTime);
+
 
         });
     }

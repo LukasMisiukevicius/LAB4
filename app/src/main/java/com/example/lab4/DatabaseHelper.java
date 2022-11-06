@@ -47,14 +47,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_TITLE, title);
         cv.put(COLUMN_CONTENT, content);
         cv.put(COLUMN_TIME, time);
-        long result = db.insert(TABLE_NAME, null, cv);
+        long result;
+        if(!title.isEmpty())
+        {
+            if(!content.isEmpty())
+            {
+                result = db.insert(TABLE_NAME, null, cv);
+            }else
+            {
+                Toast.makeText(context, "Content can not be empty!", Toast.LENGTH_SHORT).show();
+                result = -1;
+            }
+        }else
+        {
+            Toast.makeText(context, "Title can not be empty!", Toast.LENGTH_SHORT).show();
+            result = -1;
+        }
         if(result == -1)
         {
-            Toast.makeText(context,"failed",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Error Creating New Note",Toast.LENGTH_LONG).show();
         }
         else
         {
-            Toast.makeText(context,"success",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Successfully Created New Note",Toast.LENGTH_LONG).show();
 
         }
     }
@@ -78,7 +93,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_CONTENT,content);
         long time = System.currentTimeMillis();
         cv.put(COLUMN_TIME,time);
-        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        long result;
+        if(!title.isEmpty())
+        {
+            if(!content.isEmpty())
+            {
+                result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+            }else
+            {
+                Toast.makeText(context, "Content can not be empty!", Toast.LENGTH_SHORT).show();
+                result = -1;
+            }
+        }else
+        {
+            Toast.makeText(context, "Title can not be empty!", Toast.LENGTH_SHORT).show();
+            result = -1;
+        }
         if(result == -1){
             Toast.makeText(context, "Error Updating", Toast.LENGTH_SHORT).show();
 

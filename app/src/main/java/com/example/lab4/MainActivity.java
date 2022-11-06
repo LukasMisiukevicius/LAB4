@@ -55,11 +55,8 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recycleView.removeAllViewsInLayout();
                 storeDataInArrays();
-                customAdapter = new CustomAdapter(MainActivity.this, noteId, title, content, time);
-                recycleView.setAdapter(customAdapter);
-                recycleView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                customAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
