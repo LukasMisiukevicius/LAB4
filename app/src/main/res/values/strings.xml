@@ -4,4 +4,7 @@
     <string name="note_title">Title</string>
     <string name="note_content">Note content</string>
     <string name="save_note">Save</string>
+    <string name="add_new_note">Add New Note</string>
+    <string name="app_name_new">Notes App</string>
+    <string name="update_note">Update</string>
 </resources>
