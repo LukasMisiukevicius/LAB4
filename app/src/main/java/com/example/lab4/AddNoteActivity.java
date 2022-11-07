@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,13 +24,13 @@ public class AddNoteActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.etTitle);
         etNoteContent = findViewById(R.id.etNoteContent);
         saveButton = findViewById(R.id.btnSave);
+
         saveButton.setOnClickListener(view -> {
                 String title = etTitle.getText().toString();
                 String content = etNoteContent.getText().toString();
                 long createdTime = System.currentTimeMillis();
 
                 DatabaseHelper dbHE = new DatabaseHelper(AddNoteActivity.this);
-
                 dbHE.addNote(title, content, createdTime);
 
 

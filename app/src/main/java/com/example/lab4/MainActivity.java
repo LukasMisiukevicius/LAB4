@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,14 +42,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recycleView = findViewById(R.id.rvMain);
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
-
         dbHE = new DatabaseHelper(MainActivity.this);
         noteId = new ArrayList<>();
         title = new ArrayList<>();
         content = new ArrayList<>();
         time = new ArrayList<>();
-
-        storeDataInArrays();
         customAdapter = new CustomAdapter(MainActivity.this, noteId, title, content, time);
         recycleView.setAdapter(customAdapter);
         recycleView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
@@ -55,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                storeDataInArrays();
-                customAdapter.notifyDataSetChanged();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -73,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        storeDataInArrays();
+        customAdapter.notifyDataSetChanged();
 
     }
 
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
 
     void storeDataInArrays(){
         Cursor cursor = dbHE.readAllData();

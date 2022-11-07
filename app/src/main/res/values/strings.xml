@@ -8,4 +8,6 @@
     <string name="app_name_new">Notes App</string>
     <string name="update_note">Update</string>
     <string name="update_note_window">Update Note</string>
+    <string name="delete_note">Delete Note</string>
+
 </resources>

@@ -1,11 +1,15 @@
 package com.example.lab4;
 
+import static android.widget.Toast.makeText;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,10 +46,41 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         holder.tvNoteID.setText(String.valueOf(noteId.get(position)));
         holder.tvTitle.setText(String.valueOf(title.get(position)));
-
         long timeLong = Long.parseLong(String.valueOf(time.get(position)));
         String formattedTime = DateFormat.getDateTimeInstance().format(timeLong);
         holder.tvTime.setText(String.valueOf(formattedTime));
+        holder.mainLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                PopupMenu menu = new PopupMenu(context,v);
+                menu.getMenu().add("Delete Note");
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getTitle().equals("Delete Note")){
+                            Intent intent = new Intent(context, UpdateNoteActivity.class);
+                            intent.putExtra("id",String.valueOf(noteId.get(position)));
+                            DatabaseHelper dbHE = new DatabaseHelper(context);
+                            String id = intent.getStringExtra("id");
+                            dbHE.deleteNote(id);
+                            intent = new Intent(context, MainActivity.class);
+                            context.startActivity(intent);
+
+                        }
+                        return true;
+                    }
+                });
+                menu.show();
+                return true;
+
+            }
+        });
+
+
+
+
+
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,4 +113,5 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
+
 }

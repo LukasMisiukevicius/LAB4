@@ -5,26 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddNoteActivity"
+    android:background="@color/black"
     android:padding="10dp">
 
     <EditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="5dp"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:hint="@string/note_title"
         android:inputType="text"/>
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/etNoteContent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:layout_below="@id/etTitle"
         android:hint="@string/note_content"
         android:gravity="top"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:layout_above="@id/btnSave"/>
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/save_note"
+        android:layout_marginTop="5dp"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
